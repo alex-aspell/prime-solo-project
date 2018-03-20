@@ -1,4 +1,12 @@
-<h1>Movie</h1>
-<div ng-repeat="movie in mc.moviePage.list">
-    <p>{{movie.title}}</p>
-</div>
+<section class="container" ng-repeat="movie in mc.moviePage">
+    <h2 class="row">{{movie.title}}</h2>
+    <div class="row">
+            <img class="col-{breakpoint}-auto" src="http://image.tmdb.org/t/p/w342{{movie.poster_path}}">
+            <div class="flex-column col-md-4">
+                <h3>Movie Info</h3>
+                <p>{{movie.release_date}}</p>
+                <p>{{movie.overview}}</p>
+            </div>
+            <h3 class="col-md-4">User Rating</h3>
+    </div>
+</section>
