@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="movieApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Angular -->
+    <script src="/vendors/angular.js"></script>
+    <script src="/vendors/angular-route.js"></script>
+    <!-- Scripts -->
+    <script src="scripts/client.js"></script>
+    <script src="scripts/services/movie.service.js"></script>
+    <script src="scripts/controllers/movie.controller.js"></script>
+    <script src="scripts/controllers/home.controller.js"></script>
+    <script src="scripts/controllers/user.controller.js"></script>
+    <script src="scripts/controllers/favorites.controller.js"></script>
+    <script src="scripts/controllers/random.controller.js"></script>
+    <script src="scripts/controllers/login.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/login.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/user.controller.js"></script>
+    <script type="text/javascript" src="scripts/services/user.service.js"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Solo Project</title>
+</head>
+<body>
+    <header ng-include="'/views/partials/header.html'"></header>
+    <main ng-view>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<main class="container">
+    <h2 ng-click="hc.checkClick()">Now Playing</h2>
+    <section class="row">
+            <div class="col-md-4" ng-repeat="movie in hc.nowPlayingArray.list">
+                <div>{{movie.title}}</div>
+                <img ng-click="hc.goToMoviePage(movie)" src="http://image.tmdb.org/t/p/w185{{movie.poster_path}}">
+            </div>
+    </section>
+</main>
