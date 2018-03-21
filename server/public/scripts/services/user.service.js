@@ -2,6 +2,7 @@ app.service('UserService', ['$http', '$location', function($http, $location){
   console.log('UserService Loaded');
   var self = this;
   self.userObject = {};
+  
 
   self.getuser = function(){
     console.log('UserService -- getuser');
@@ -9,7 +10,8 @@ app.service('UserService', ['$http', '$location', function($http, $location){
         if(response.data.username) {
             // user has a curret session on the server
             self.userObject.userName = response.data.username;
-            console.log('UserService -- getuser -- User Data: ', self.userObject.userName);
+            self.userObject.id = response.data.id; 
+            console.log('UserService -- getuser -- User Data: ', self.userObject);
         } else {
             console.log('UserService -- getuser -- failure');
             // user has no session, bounce them back to the login page

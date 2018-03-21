@@ -6,7 +6,14 @@
                 <h3>Movie Info</h3>
                 <p>{{movie.release_date}}</p>
                 <p>{{movie.overview}}</p>
+                <h3>Average Rating</h3>
+                <h4>{{movie.averageRating}}</h4>
             </div>
-            <h3 class="col-md-4">User Rating</h3>
+            <div class="flex-column col-md-4">
+                <h3>User Rating</h3>
+                <input type="number" ng-model="mc.enteredRating.rating" min="1" max="100">
+                <button ng-click="mc.rateMovie(mc.enteredRating)">Rate</button>
+                <p>Rate {{movie.title}} between 1 and 100</p>
+            </div>
     </div>
 </section>

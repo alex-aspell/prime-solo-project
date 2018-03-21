@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const pool = require('../modules/pool');
 
 const apiKey = '4a5d31bd9f16d5c8d4ac776d630c9bc1';
 
@@ -16,4 +17,49 @@ router.get('/', (request, response) => {
     })
 })
 
+router.post('/', (request, response) => {
+    let newRating = request.body; 
+    console.log('new rating added', request.body);
+    const sqlText = `INSERT INTO ratings (rating, movie_id, user_id)
+    VALUES ($1, $2, $3);`;
+    pool.query(sqlText, [newRating.rating, newRating.movie_id, newRating.user_id])
+    .then((result) => {
+        console.log('new rating added');
+        response.sendStatus(201);
+    })
+    .catch((error) => {
+        console.log('did not add');
+        response.sendStatus(500);
+    })
+})
+
+router.get('/average/:id', (request, response) => {
+    const id = request.params.id;
+    console.log('get id', id);
+    const sqlText = 'SELECT AVG(rating) FROM ratings WHERE movie_id=$1;';
+    pool.query(sqlText, [id])
+    .then(result => {
+        console.log('Get average of', id);
+        response.send(result.rows);
+    })
+    .catch(error => {
+        console.log('Avg error', error);
+        response.sendStatus(500); 
+    })
+})
+
+router.get('/chart/:id', (request, response) => {
+    const id = request.params.id;
+    console.log('get id', id);
+    const sqlText = 'SELECT rating FROM ratings WHERE movie_id=$1;';
+    pool.query(sqlText, [id])
+    .then(result => {
+        console.log('Get average of', id);
+        response.send(result.rows);
+    })
+    .catch(error => {
+        console.log('Avg error', error);
+        response.sendStatus(500); 
+    })
+})
 module.exports = router; 
