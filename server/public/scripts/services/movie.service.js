@@ -100,6 +100,16 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
             self.createChart(dataset);
             
     } 
+    self.createChart = function(dataset){
+        let chart = new tauCharts.Chart({
+            data: dataset,
+            type: 'line',
+            x: 'x',
+            y: 'y',
+            color: 'red'
+        });
+        chart.renderTo('#line');
+    }
 
     self.getNowPlaying();
 }])
