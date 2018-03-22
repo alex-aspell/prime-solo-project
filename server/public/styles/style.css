@@ -73,6 +73,13 @@ li a {
   text-decoration: none;
 }
 
+#line{
+  width:800px;
+  height:450px;  
+  margin:0;
+  padding: 0;
+ }
+
 /* Change the link color to #111 (black) on hover
 li a:hover {
   text-decoration: underline;

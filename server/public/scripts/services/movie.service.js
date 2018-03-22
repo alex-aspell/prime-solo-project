@@ -102,11 +102,20 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
     } 
     self.createChart = function(dataset){
         let chart = new tauCharts.Chart({
+            guide: {
+                y: {label: {text: '# of Ratings'}},
+                x: { min: 0, max: 100, tickFormat: 's', label:{text: 'Rating Scale'}},
+                showGridLines: 'y',
+                interpolate: 'smooth-keep-extremum'
+            },
             data: dataset,
             type: 'line',
             x: 'x',
             y: 'y',
-            color: 'red'
+            color: 'red',
+            settings: {
+                fitModel: 'fit-width'
+            }
         });
         chart.renderTo('#line');
     }
