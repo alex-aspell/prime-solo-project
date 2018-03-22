@@ -55,6 +55,7 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
     }
     
     self.getRatingsForChart = function(id){
+        //function runs in self.goToMoviePage at line 14
         $http({
             method: 'GET',
             url: `/movies/chart/${id}`
@@ -66,27 +67,39 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
             for (let i = 0; i<responseArray.length; i++) {
                 ratingArray.push(responseArray[i].rating);
             }
-                let yAxis = []; 
-                let xAxis = []; 
-                let prev;
-            
-                ratingArray.sort();
-                for ( var i = 0; i < ratingArray.length; i++ ) {
-                    if ( ratingArray[i] !== prev ) {
-                        yAxis.push(ratingArray[i]);
-                        xAxis.push(1);
-                    } else {
-                        xAxis[xAxis.length-1]++;
-                    }
-                    prev = ratingArray[i];
-                }
-                console.log(yAxis, xAxis);
-            
+            self.createChartArrays(ratingArray);
         })
         .catch(function(error) {
-            console.log('get avg error', error);
+            console.log('get chart rating error', error);
         })
     }
+
+    self.createChartArrays = function(ratingArray){ 
+        //function runs in .then of self.getRatingsForChart at line 70
+            let xAxis = []; 
+            let yAxis = []; 
+            let prev;
+            let dataset = [];
+            
+            
+            ratingArray.sort();
+            for ( let i = 0; i < ratingArray.length; i++ ) {
+                if ( ratingArray[i] !== prev ) {
+                    xAxis.push(ratingArray[i]);
+                    yAxis.push(1);
+                } else {
+                    yAxis[yAxis.length-1]++;
+                }
+                prev = ratingArray[i];
+                }
+            
+            for (let i = 0; i < xAxis.length; i++ ){
+                dataset.push({type: 'rating', x: xAxis[i], y: yAxis[i]})
+            }
+            console.log('dataset', dataset);
+            self.createChart(dataset);
+            
+    } 
 
     self.getNowPlaying();
 }])
