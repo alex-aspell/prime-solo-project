@@ -49,6 +49,9 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
             console.log('get avg', response.data[0]);
             self.moviePage.list.averageRating = Math.floor(response.data[0].avg);
         })
+        // .then(function(response) {
+        //     $location.url(`/movie/${id}`);
+        // })
         .catch(function(error) {
             console.log('get avg error', error);
         })
@@ -68,7 +71,11 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
                 ratingArray.push(responseArray[i].rating);
             }
             self.createChartArrays(ratingArray);
+           
         })
+        // .then(function(response) {
+        //     $location.url(`/movie/${id}`);
+        // })
         .catch(function(error) {
             console.log('get chart rating error', error);
         })
