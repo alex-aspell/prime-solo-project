@@ -16,7 +16,37 @@
                 <p>Rate {{movie.title}} between 1 and 100</p>
             </div>
     </div>
-    <div class="row">
+    <br>
+    <br>
+    <div class="row" id='thingy'>
             <div class="col-md-8 offset-md-2" id="line" width="800" height="450"></div>
     </div>
+    <h3>Search Demographic Info</h3>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="age">Age:</label>
+            <select class="demographic-select" type="number" ng-model="mc.demographics.age">
+                <option value="0-18">0-18</option>
+                <option value="19-25">19-25</option>
+                <option value="26-34">26-34</option>
+                <option value="35-54">35-54</option>
+                <option value="55-64">55-64</option>
+                <option value="65+">65+</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="gender">Gender:</label>
+            <select class="demographic-select" type="text" ng-model="mc.demographics.gender">
+                <option value="M">M</option>
+                <option value="F">F</option>
+            </select>
+        </div>
+        <div class="col-md-1">
+            <button ng-click="mc.description=!mc.description">Search</button>
+        </div>
+    </div>
+    <div ng-show="mc.description" class="row">Gender is a construct!</div>
+    <br>
+    <br>
+
 </section>

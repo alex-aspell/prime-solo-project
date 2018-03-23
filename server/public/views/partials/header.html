@@ -1,19 +1,20 @@
 <header class="container-fluid">
-    <section class="row">
-        <h1 class="col-md-3">Rate-iology</h1>
-        <div class="col-md-4">
-            <a href="/#!home"><button>Home</button></a>
-            <a href="/#!user"><button>User</button></a>
-            <a href="/#!favorites"><button>Favorites</button></a>
-            <a href="/#!random"><button>Random</button></a>
-        </div>
-        <div class="col-md-3">
-            <input type="text" placeholder="Search Movies">
-            <button>Search</button>
-        </div>
-        <nav class="col-md-2">
-            <a href="/#!login">Login</a>
-            <a href="/#!register">Register</a>
-        </nav>
-    </section>
-</header>
+        <section class="row">
+            <h1 class="col-md-3">Rate-iology</h1>
+            <div class="col-md-4">
+                <a href="/#!home"><button class="header-btn">Home</button></a>
+                <a href="/#!user"><button class="header-btn">User</button></a>
+                <a href="/#!favorites"><button class="header-btn">Favorites</button></a>
+                <a href="/#!random"><button class="header-btn">Random</button></a>
+            </div>
+            <div class="col-md-3">
+                <input class="header-input" ng-model="query" type="text" placeholder="Search Movies">
+                <button class="header-input">Search</button>
+            </div>
+            <nav id="header-nav" class="col-md-2">
+                <a class="header-nav" href="/#!login">Login</a>
+                <a class="header-nav" href="/#!register">Register</a>
+            </nav>
+        </section>
+    </header>
+    

@@ -73,13 +73,48 @@ li a {
   text-decoration: none;
 }
 
-#line{
+
+/* #line{
   width:800px;
   height:450px;  
   margin:0;
   padding: 0;
+ } */
+
+ header {
+  background-color: darkred;
+  color: white;
  }
 
+ .header-btn {
+   background-color: darkred;
+   color: white;
+   height: 100%;
+   border-color: maroon;
+ }
+
+ .header-input {
+   margin-top: 10px;
+ }
+ #header-nav{
+  margin-top: 13px;
+ }
+ .header-nav {
+   color: white;
+   
+ }
+
+ .demographic-select {
+   width: 80px;
+   margin-left: 10px;
+   margin-right: 10px;
+ }
+
+ input{
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 20px;
+  }
 /* Change the link color to #111 (black) on hover
 li a:hover {
   text-decoration: underline;

@@ -12,11 +12,22 @@
     </div>
     <div>
       <label for="age">Age:</label>
-      <input type="number" ng-model="vm.user.age" />
+      <select type="number" ng-model="vm.user.age">
+          <option value="0-18">0-18</option>
+          <option value="19-25">19-25</option>
+          <option value="26-34">26-34</option>
+          <option value="35-54">35-54</option>
+          <option value="55-64">55-64</option>
+          <option value="65+">65+</option>
+        </select>
   </div>
   <div>
     <label for="gender">Gender:</label>
-    <input type="text" ng-model="vm.user.gender" />
+    <select type="text" ng-model="vm.user.gender">
+        <option value="M">M</option>
+        <option value="F">F</option>
+        <option value="N">Choose not to answer</option>
+    </select>
 </div>
     <input class="btn btn-default" type="submit" name="submit" value="Register" />
     <a href="#!home">Cancel</a>

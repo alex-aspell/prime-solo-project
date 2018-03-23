@@ -4,22 +4,23 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
     self.nowPlayingArray = {list: []};
     self.moviePage = {list: []};
     self.enteredRating = {};
+    
 
-    self.goToMoviePage = function($routeParams) {
-        let id = $routeParams.id;
-        self.enteredRating.movie_id = $routeParams.id;
-        console.log('Movie id', self.enteredRating.movie_id);
-        $location.url(`/movie/${id}`);
-        self.getMovieAverage(id);
-        self.getRatingsForChart(id);
-        self.moviePage.list = $routeParams;
-        console.log(self.moviePage.list);
+    self.goToMoviePage = function(movie) {
+        //let id = $routeParams.id;
+        self.moviePage.list = movie;
+        // console.log('Clicking movie page', moviePage.list);
+        // console.log('Clicked movie', movie);
+        self.enteredRating.movie_id = movie.id;
+        //console.log('Movie id', self.enteredRating.movie_id);
+        $location.url(`/movie/${movie.id}`);
+
     }
 
-    self.getNowPlaying = function() {
+    self.getNowPlaying = function($routeParams) {
         $http.get('/movies')
         .then(function(response) {
-            console.log(response.data.results);
+            console.log('movie call', response.data.results);
             self.nowPlayingArray.list = response.data.results;
         }).catch(function(error){
             console.log('Error getting new releases', error);
@@ -59,7 +60,7 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
     
     self.getRatingsForChart = function(id){
         //function runs in self.goToMoviePage at line 14
-        $http({
+        return $http({
             method: 'GET',
             url: `/movies/chart/${id}`
         })
@@ -70,8 +71,9 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
             for (let i = 0; i<responseArray.length; i++) {
                 ratingArray.push(responseArray[i].rating);
             }
-            self.createChartArrays(ratingArray);
-           
+            return ratingArray;
+            //self.createChartArrays(ratingArray);
+            
         })
         // .then(function(response) {
         //     $location.url(`/movie/${id}`);
@@ -81,51 +83,7 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
         })
     }
 
-    self.createChartArrays = function(ratingArray){ 
-        //function runs in .then of self.getRatingsForChart at line 70
-            let xAxis = []; 
-            let yAxis = []; 
-            let prev;
-            let dataset = [];
-            
-            
-            ratingArray.sort();
-            for ( let i = 0; i < ratingArray.length; i++ ) {
-                if ( ratingArray[i] !== prev ) {
-                    xAxis.push(ratingArray[i]);
-                    yAxis.push(1);
-                } else {
-                    yAxis[yAxis.length-1]++;
-                }
-                prev = ratingArray[i];
-                }
-            
-            for (let i = 0; i < xAxis.length; i++ ){
-                dataset.push({type: 'rating', x: xAxis[i], y: yAxis[i]})
-            }
-            console.log('dataset', dataset);
-            self.createChart(dataset);
-            
-    } 
-    self.createChart = function(dataset){
-        let chart = new tauCharts.Chart({
-            guide: {
-                y: {label: {text: '# of Ratings'}},
-                x: { min: 0, max: 100, tickFormat: 's', label:{text: 'Rating Scale'}},
-                showGridLines: 'y',
-                interpolate: 'smooth-keep-extremum'
-            },
-            data: dataset,
-            type: 'line',
-            x: 'x',
-            y: 'y',
-            color: 'red',
-            settings: {
-                fitModel: 'fit-width'
-            }
-        });
-        chart.renderTo('#line');
-    }
 
+    
     self.getNowPlaying();
 }])
