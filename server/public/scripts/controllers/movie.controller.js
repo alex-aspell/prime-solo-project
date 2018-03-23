@@ -12,7 +12,9 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
     self.enteredRating.user_id = UserService.userObject.id;
     
     let id = $routeParams.id;
-
+    //
+    //Need to do a get using route params id that will get movie info from the API
+    //
     MovieService.getMovieAverage(id);
     MovieService.getRatingsForChart(id).then(function(ratingArray){
         
