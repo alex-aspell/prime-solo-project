@@ -222,16 +222,19 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
             self.moviePage.list.heatRating = 0;
          }
          else if ( squareRoot > 0 && squareRoot <= 10){
-            self.moviePage.list.heatRating = 1;
+            self.moviePage.list.heatRating = 'one';
          }
          else if ( squareRoot > 10 && squareRoot <= 25){
-            self.moviePage.list.heatRating = 2;
+            self.moviePage.list.heatRating = 'two';
          }
          else if ( squareRoot > 25 && squareRoot <= 50){ 
-            self.moviePage.list.heatRating = 3;
+            self.moviePage.list.heatRating = 'three';
+         }
+         else if (squareRoot > 50) {
+            self.moviePage.list.heatRating = 'four';
          }
          else {
-            self.moviePage.list.heatRating = 4;
+             self.moviePage.list.heatRating = NoRating;
          }
          console.log('heat rating', self.moviePage.list.heatRating);
          console.log('movie', self.moviePage.list);
