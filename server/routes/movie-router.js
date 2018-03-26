@@ -62,4 +62,21 @@ router.get('/chart/:id', (request, response) => {
         response.sendStatus(500); 
     })
 })
+
+router.post('/demographics', (request, response) => {
+    //THIS IS NOT A POST. I NEEDED TO GET AN OBJECT 
+    const demographicGet = request.body;
+    console.log('demographic get', demographicGet);
+    const sqlText = 'SELECT DISTINCT ratings.rating FROM ratings JOIN users ON users.id=ratings.user_id WHERE ratings.movie_id=$1 and users.age=$2 and users.gender=$3;';
+    pool.query(sqlText, [demographicGet.movie_id, demographicGet.age, demographicGet.gender])
+    .then(result => {
+        console.log('get demographic info', result.rows);
+        response.send(result.rows);
+    })
+    .catch(error => {
+        console.log('Demographics error', error);
+        response.sendStatus(500);
+    })
+})
+
 module.exports = router; 

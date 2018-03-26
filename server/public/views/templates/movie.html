@@ -42,10 +42,12 @@
             </select>
         </div>
         <div class="col-md-1">
-            <button ng-click="mc.description=!mc.description">Search</button>
+            <button ng-click=mc.getDemographicInfo(mc.demographics)>Search</button>
         </div>
     </div>
-    <div ng-show="mc.description" class="row">Gender is a construct!</div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2" id="line2" width="800" height="450"></div>
+    </div>
     <br>
     <br>
 

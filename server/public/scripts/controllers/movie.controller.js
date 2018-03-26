@@ -1,4 +1,4 @@
-app.controller('MovieController', ['MovieService', 'UserService', '$routeParams', function(MovieService, UserService, $routeParams){
+app.controller('MovieController', ['MovieService', 'UserService', '$routeParams','$http', function(MovieService, UserService, $routeParams, $http){
     console.log($routeParams);
     let self = this; 
 
@@ -10,6 +10,21 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
     
     self.enteredRating = MovieService.enteredRating; 
     self.enteredRating.user_id = UserService.userObject.id;
+
+    self.getDemographicInfo = function(demographics) {
+        //THIS IS NOT A POST. I HAD TO USE POST TO PASS UP ALL THE INFO IN DEMOGRAPHICS
+        self.demographics.movie_id = $routeParams.id
+        console.log(demographics);
+        $http({
+            method: 'POST', 
+            url: `/movies/demographics`,
+            data: demographics
+        }).then(function(response) {
+            console.log('demographics response', response.data)
+        }).catch(function(error) {
+            console.log('demographics error', error);
+        })
+    }
     
     let id = $routeParams.id;
     //

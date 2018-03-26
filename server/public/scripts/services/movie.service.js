@@ -83,7 +83,6 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
         })
     }
 
-
     
     self.getNowPlaying();
 }])
