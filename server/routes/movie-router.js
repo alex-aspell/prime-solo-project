@@ -17,6 +17,19 @@ router.get('/', (request, response) => {
     })
 })
 
+router.get('/individual/:id', (request, response) => {
+    let id = request.params.id;
+    let url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
+
+    axios.get(url)
+    .then( res => {
+        response.send(res.data)
+    })
+    .catch( error => {
+        console.log('Error on now playing request', error);
+    })
+})
+
 router.post('/', (request, response) => {
     let newRating = request.body; 
     console.log('new rating added', request.body);

@@ -5,7 +5,7 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
     self.userService = UserService;
     self.userObject = UserService.userObject;
 
-    self.moviePage = MovieService.moviePage;
+    self.moviePage = {list: []}
     self.rateMovie = MovieService.rateMovie;
     
     self.enteredRating = MovieService.enteredRating; 
@@ -14,9 +14,39 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
     let id = $routeParams.id;
     //
     //Need to do a get using route params id that will get movie info from the API
+    self.getMovieByID = function(id) {
+        $http.get(`/movies/individual/${id}`)
+        .then(function(response) {
+            console.log('get movie by id', response.data);
+            self.moviePage.list = response.data;
+            self.getMovieAverage(id);
+        }).catch(function(error){
+            console.log('Error getting movie by id', error);
+        })
+    }
+
+    self.getMovieAverage = function(id) {
+        $http({
+            method: 'GET',
+            url: `/movies/average/${id}`
+        })
+        .then(function(response) {
+            console.log('get avg', response.data[0]);
+            self.moviePage.list.averageRating = Math.floor(response.data[0].avg);
+            console.log('average rating', self.moviePage.list.averageRating)
+        })
+        // .then(function(response) {
+        //     $location.url(`/movie/${id}`);
+        // })
+        .catch(function(error) {
+            console.log('get avg error', error);
+        })
+    }
     
+    
+    self.getMovieByID(id);
     //
-    MovieService.getMovieAverage(id);
+    
     MovieService.getRatingsForChart(id).then(function(ratingArray){
         
       self.createChartArrays(ratingArray);
@@ -99,7 +129,7 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
         }
         let totalRating = ratingArray.reduce(getSum);
         let demographicRating = Math.floor(totalRating/ratingArray.length);
-        moviePage.list.demographicRating = demographicRating; 
+        self.moviePage.list.demographicRating = demographicRating; 
     }
 
     self.createDemographicChartArrays = function(ratingArray){ 

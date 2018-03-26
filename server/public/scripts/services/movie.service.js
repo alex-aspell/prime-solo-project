@@ -2,13 +2,13 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
     let self = this; 
 
     self.nowPlayingArray = {list: []};
-    self.moviePage = {list: []};
+    // self.moviePage = {list: []};
     self.enteredRating = {};
     
 
     self.goToMoviePage = function(movie) {
         //let id = $routeParams.id;
-        self.moviePage.list = movie;
+        // self.moviePage.list = movie;
         // console.log('Clicking movie page', moviePage.list);
         // console.log('Clicked movie', movie);
         self.enteredRating.movie_id = movie.id;
@@ -41,22 +41,22 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
         })
     }
     
-    self.getMovieAverage = function(id) {
-        $http({
-            method: 'GET',
-            url: `/movies/average/${id}`
-        })
-        .then(function(response) {
-            console.log('get avg', response.data[0]);
-            self.moviePage.list.averageRating = Math.floor(response.data[0].avg);
-        })
-        // .then(function(response) {
-        //     $location.url(`/movie/${id}`);
-        // })
-        .catch(function(error) {
-            console.log('get avg error', error);
-        })
-    }
+    // self.getMovieAverage = function(id) {
+    //     $http({
+    //         method: 'GET',
+    //         url: `/movies/average/${id}`
+    //     })
+    //     .then(function(response) {
+    //         console.log('get avg', response.data[0]);
+    //         self.moviePage.list.averageRating = Math.floor(response.data[0].avg);
+    //     })
+    //     // .then(function(response) {
+    //     //     $location.url(`/movie/${id}`);
+    //     // })
+    //     .catch(function(error) {
+    //         console.log('get avg error', error);
+    //     })
+    // }
     
     self.getRatingsForChart = function(id){
         //function runs in self.goToMoviePage at line 14
