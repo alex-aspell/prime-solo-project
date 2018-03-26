@@ -76,11 +76,26 @@ router.get('/chart/:id', (request, response) => {
     })
 })
 
+router.get('/heat/:id', (request, response) => {
+    const id = request.params.id;
+    console.log('get id', id);
+    const sqlText = 'SELECT rating FROM ratings WHERE movie_id=$1;';
+    pool.query(sqlText, [id])
+    .then(result => {
+        console.log('Get average of', id);
+        response.send(result.rows);
+    })
+    .catch(error => {
+        console.log('Avg error', error);
+        response.sendStatus(500); 
+    })
+})
+
 router.post('/demographics', (request, response) => {
     //THIS IS NOT A POST. I NEEDED TO GET AN OBJECT 
     const demographicGet = request.body;
     console.log('demographic get', demographicGet);
-    const sqlText = 'SELECT DISTINCT ratings.rating FROM ratings JOIN users ON users.id=ratings.user_id WHERE ratings.movie_id=$1 and users.age=$2 and users.gender=$3;';
+    const sqlText = 'SELECT ratings.rating FROM ratings JOIN users ON users.id=ratings.user_id WHERE ratings.movie_id=$1 and users.age=$2 and users.gender=$3;';
     pool.query(sqlText, [demographicGet.movie_id, demographicGet.age, demographicGet.gender])
     .then(result => {
         console.log('get demographic info', result.rows);

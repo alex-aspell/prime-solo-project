@@ -20,6 +20,7 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
             console.log('get movie by id', response.data);
             self.moviePage.list = response.data;
             self.getMovieAverage(id);
+            self.getHeatRatings(id);
         }).catch(function(error){
             console.log('Error getting movie by id', error);
         })
@@ -33,7 +34,7 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
         .then(function(response) {
             console.log('get avg', response.data[0]);
             self.moviePage.list.averageRating = Math.floor(response.data[0].avg);
-            console.log('average rating', self.moviePage.list.averageRating)
+            console.log('average rating', self.moviePage.list.averageRating);
         })
         // .then(function(response) {
         //     $location.url(`/movie/${id}`);
@@ -45,11 +46,11 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
     
     
     self.getMovieByID(id);
+    
     //
     
     MovieService.getRatingsForChart(id).then(function(ratingArray){
-        
-      self.createChartArrays(ratingArray);
+        self.createChartArrays(ratingArray);
     });
     // self.moviePage.list = MovieService.selectedMovie;
     console.log('moviepage', self.moviePage.list);
@@ -177,4 +178,65 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
         });
         chart.renderTo('#line2');
     }
+    
+    self.getHeatRatings = function(id){
+        //function runs in self.goToMoviePage at line 14
+        $http({
+            method: 'GET',
+            url: `/movies/heat/${id}`
+        })
+        .then(function(response) {
+            console.log('get chart ratings', response.data);
+            let responseArray = response.data;
+            let heatArray = [];
+            for (let i = 0; i<responseArray.length; i++) {
+                heatArray.push(responseArray[i].rating);
+            }
+            self.createHeatRating(heatArray);
+            //self.createChartArrays(ratingArray);
+            
+        })
+        // .then(function(response) {
+        //     $location.url(`/movie/${id}`);
+        // })
+        .catch(function(error) {
+            console.log('get chart rating error', error);
+        })
+    }
+
+    self.createHeatRating = function(heatArray){
+        function getSum(total, num){
+            return total + num;
+        }
+        let totalRating = heatArray.reduce(getSum);
+        let mean = Math.floor(totalRating/heatArray.length);
+         let sumArray = [];
+         for (let i=0; i<heatArray.length; i++) {
+             let squared = Math.pow((heatArray[i]-mean), 2)
+             sumArray.push(squared);
+         }
+         let totalSum = sumArray.reduce(getSum);
+         let squareRoot = Math.floor(Math.sqrt(totalSum/(heatArray.length)));
+         console.log('square root', squareRoot);
+         if (squareRoot == 0){
+            self.moviePage.list.heatRating = 0;
+         }
+         else if ( squareRoot > 0 && squareRoot <= 10){
+            self.moviePage.list.heatRating = 1;
+         }
+         else if ( squareRoot > 10 && squareRoot <= 25){
+            self.moviePage.list.heatRating = 2;
+         }
+         else if ( squareRoot > 25 && squareRoot <= 50){ 
+            self.moviePage.list.heatRating = 3;
+         }
+         else {
+            self.moviePage.list.heatRating = 4;
+         }
+         console.log('heat rating', self.moviePage.list.heatRating);
+         console.log('movie', self.moviePage.list);
+    }
+    
+    
+    
 }])
