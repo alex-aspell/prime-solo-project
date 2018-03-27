@@ -6,5 +6,4 @@ app.controller('HomeController', ['MovieService', function(MovieService){
     self.nowPlayingArray = MovieService.nowPlayingArray;
     self.getNowPlaying = MovieService.getNowPlaying;
     // self.nowPlayingArray; 
-    
 }])

@@ -2,3 +2,14 @@
     <h1 id="welcome" class="lead">Welcome, {{vm.userObject.userName}}!</h1>
     <button class="btn btn-default" ng-click="vm.userService.logout()">Log Out</button>
 </div>
+<main class="container">
+    <h2>User Movies</h2>
+    <!-- <input ng-model="query" placeholder="Search"> -->
+    <section class="row">
+            <div class="col-md-4" ng-repeat="movie in vm.userMovies.list | filter:query">
+                <!-- <div ng-click="hc.goToMoviePage(movie)">{{movie.title}}</div> -->
+                <br>
+                <img ng-click="vm.goToMoviePage(movie)" src="http://image.tmdb.org/t/p/w342{{movie.poster_path}}">
+            </div>
+    </section>
+</main>
