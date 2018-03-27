@@ -1,0 +1,15 @@
+<div class="container">
+    <h1 id="welcome" class="lead offset-md-9 col-md-3">Welcome, {{fc.userObject.userName}}!</h1>
+</div>
+<main class="container">
+    <h2>Favorite Movies</h2>
+    <!-- <input ng-model="query" placeholder="Search"> -->
+    <section class="row">
+            <div class="col-md-4" ng-repeat="movie in fc.favoriteMovies.list | filter:query">
+                <!-- <div ng-click="hc.goToMoviePage(movie)">{{movie.title}}</div> -->
+                <br>
+                <img ng-click="fc.goToMoviePage(movie)" src="http://image.tmdb.org/t/p/w342{{movie.poster_path}}">
+            </div>
+    </section>
+</main>
+

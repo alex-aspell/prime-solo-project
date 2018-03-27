@@ -3,7 +3,8 @@ app.controller('UserController', ['UserService', 'MovieService', '$http', functi
   var self = this;
   self.userService = UserService;
   self.userObject = UserService.userObject;
-
+  self.goToMoviePage = MovieService.goToMoviePage;
+  
   self.userMovies = {list: []}
   self.getUserMovies = function(){
     $http.get('/movies/user')

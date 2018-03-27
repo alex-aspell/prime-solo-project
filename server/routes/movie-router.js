@@ -139,4 +139,32 @@ router.get('/user/:id', (request, response) => {
     })
 })
 
+router.get('/favorites', (request, response) => {
+    if (request.isAuthenticated()){
+    const sqlText = 'SELECT ratings.movie_id FROM ratings WHERE user_id=$1 AND rating>=70;';
+    pool.query(sqlText, [request.user.id])
+    .then(result => {
+        console.log('Get average of', request.user.id);
+        response.send(result.rows);
+    })
+    .catch(error => {
+        console.log('Avg error', error);
+        response.sendStatus(500); 
+    })
+} 
+})
+
+router.get('/favorites/:id', (request, response) => {
+    let id = request.params.id;
+    let url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
+
+    axios.get(url)
+    .then( res => {
+        response.send(res.data)
+    })
+    .catch( error => {
+        console.log('Error on now playing request', error);
+    })
+})
+
 module.exports = router; 
