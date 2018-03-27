@@ -38,6 +38,7 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
             self.enteredRating.rating = '';
         }).catch(function(error) {
             console.log('add rating error', error);
+            $location.url('register');
         })
     }
     

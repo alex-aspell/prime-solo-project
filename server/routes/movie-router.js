@@ -31,11 +31,12 @@ router.get('/individual/:id', (request, response) => {
 })
 
 router.post('/', (request, response) => {
+    if (request.isAuthenticated()){
     let newRating = request.body; 
     console.log('new rating added', request.body);
     const sqlText = `INSERT INTO ratings (rating, movie_id, user_id)
     VALUES ($1, $2, $3);`;
-    pool.query(sqlText, [newRating.rating, newRating.movie_id, newRating.user_id])
+    pool.query(sqlText, [newRating.rating, newRating.movie_id, request.user.id])
     .then((result) => {
         console.log('new rating added');
         response.sendStatus(201);
@@ -44,6 +45,9 @@ router.post('/', (request, response) => {
         console.log('did not add');
         response.sendStatus(500);
     })
+    } else {
+        response.sendStatus(403);
+    }
 })
 
 router.get('/average/:id', (request, response) => {
