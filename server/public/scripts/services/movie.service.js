@@ -35,9 +35,11 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
             data: self.enteredRating
         }).then(function(response) {
             console.log('rating added', response);
+            swal("Rating Added!", "", "success", {button: "Great!"});
             self.enteredRating.rating = '';
         }).catch(function(error) {
             console.log('add rating error', error);
+            swal("You need to register before you rate","" ,"info", {button: "OK"});
             $location.url('register');
         })
     }

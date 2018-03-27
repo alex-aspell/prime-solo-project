@@ -19,7 +19,7 @@ app.controller('LoginController', ['$http', '$location', 'UserService', function
             if (response.status == 200) {
               console.log('success: ', response.data);
               // location works with SPA (ng-route)
-              $location.path('/user');
+              $location.path('/home');
             } else {
               console.log('failure error: ', response);
               self.message = "Incorrect credentials. Please try again.";
@@ -39,7 +39,7 @@ app.controller('LoginController', ['$http', '$location', 'UserService', function
         console.log('sending to server...', self.user);
         $http.post('/api/user/register', self.user).then(function (response) {
           console.log('success');
-          $location.path('/home');
+          $location.path('/login');
         },
           function (response) {
             console.log('error');

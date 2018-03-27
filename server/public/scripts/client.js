@@ -17,7 +17,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     })
     .when('/favorites', {
       templateUrl: '/views/templates/favorites.html',
-      controller: 'FavoritesController as fc'
+      controller: 'FavoritesController as fc',
+      resolve: {
+        getuser : function(UserService){
+          return UserService.getuser();
+        }
+      }
     })
     .when('/register', {
       templateUrl: '/views/templates/register.html',
