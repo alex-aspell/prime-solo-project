@@ -221,16 +221,16 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
          if (squareRoot == 0){
             self.moviePage.list.heatRating = 0;
          }
-         else if ( squareRoot > 0 && squareRoot <= 10){
+         else if ( squareRoot > 0 && squareRoot <= 15){
             self.moviePage.list.heatRating = 'one';
          }
-         else if ( squareRoot > 10 && squareRoot <= 25){
+         else if ( squareRoot > 15 && squareRoot <= 30){
             self.moviePage.list.heatRating = 'two';
          }
-         else if ( squareRoot > 25 && squareRoot <= 50){ 
+         else if ( squareRoot > 30 && squareRoot <= 45){ 
             self.moviePage.list.heatRating = 'three';
          }
-         else if (squareRoot > 50) {
+         else if (squareRoot > 45) {
             self.moviePage.list.heatRating = 'four';
          }
          else {
