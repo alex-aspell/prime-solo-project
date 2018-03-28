@@ -116,6 +116,9 @@ li a {
   border-radius: 20px;
   }
 
+.graph {
+  height: 200px;
+}
 /* Change the link color to #111 (black) on hover
 li a:hover {
   text-decoration: underline;
