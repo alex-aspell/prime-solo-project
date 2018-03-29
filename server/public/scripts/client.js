@@ -1,4 +1,4 @@
-const app = angular.module('movieApp', ['ngRoute']);
+const app = angular.module('movieApp', ['ngRoute', 'angularUtils.directives.dirPagination']);
 
 /// Routes ///
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {

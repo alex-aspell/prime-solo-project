@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const passport = require('./strategies/sql.localstrategy');
 const sessionConfig = require('./modules/session-middleware');
 
+const dotenv = require('dotenv').config();
+
 // Route includes
 const userRouter = require('./routes/user.router');
 const movieRouter = require('./routes/movie-router');
