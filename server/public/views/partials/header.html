@@ -8,12 +8,15 @@
                 <a href="/#!random"><button class="header-btn">Random</button></a>
             </div>
             <div class="col-md-3">
-                <input class="header-input" ng-model="query" type="text" placeholder="Search Movies">
-                <button class="header-input">Search</button>
+                <input class="header-input" id="search-input" ng-model="hc.searchMovies.input" type="text" placeholder="Search Movies">
+                <button class="header-input" ng-click="hc.searchMovies(hc.searchMovies)">Search</button>
             </div>
-            <nav id="header-nav" class="col-md-2">
+            <nav id="header-nav" class="col-md-2" ng-hide="hc.userObject.isAuthenticated">
                 <a class="header-nav" href="/#!login">Login</a>
                 <a class="header-nav" href="/#!register">Register</a>
+            </nav>
+            <nav id="header-logout" class="col-md-2" ng-show="hc.userObject.isAuthenticated">
+                <a ng-click="hc.userService.logout()">Log Out</a>
             </nav>
         </section>
     </header>

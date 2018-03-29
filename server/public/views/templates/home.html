@@ -1,8 +1,20 @@
 <main class="container">
-    <h2 ng-click="hc.checkClick()">Now Playing</h2>
+        <div ng-if="hc.userObject.isAuthenticated">
+            <h1 id="welcome" class="lead offset-md-9 col-md-3">Welcome, {{hc.userObject.userName}}!</h1>
+        </div>
+    <div ng-hide="home-nav">
+        <h2 ng-hide="nowplaying">Now Playing</h2>
+        <h2 ng-show="toprated">Top Rated</h2>
+        <h2 ng-show="popular">Popular</h2>
+    </div>
     <!-- <input ng-model="query" placeholder="Search"> -->
+    <div id="movie-nav">
+        <a ng-click="hc.getNowPlaying(); nowplaying=false; toprated=false; popular=false">Now Playing</a>
+        <a ng-click="hc.getTopRated(); toprated=true; nowplaying=true; popular=false">Top Rated</a>
+        <a ng-click="hc.getPopular(); popular=true; nowplaying=true; toprated=false">Popular</a>
+    </div>
     <section class="row">
-            <div class="col-md-4" ng-repeat="movie in hc.nowPlayingArray.list | filter:query">
+            <div class="col-md-4" ng-repeat="movie in hc.homePageArray.list">
                 <!-- <div ng-click="hc.goToMoviePage(movie)">{{movie.title}}</div> -->
                 <br>
                 <img ng-click="hc.goToMoviePage(movie)" src="http://image.tmdb.org/t/p/w342{{movie.poster_path}}">

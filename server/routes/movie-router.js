@@ -30,6 +30,45 @@ router.get('/individual/:id', (request, response) => {
     })
 })
 
+router.get('/search/:search', (request, response) => {
+    let keyword = request.params.search;
+    console.log('keyword', keyword);
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${keyword}&language=en-US&page=1&include_adult=false`;
+
+    axios.get(url)
+    .then( res => {
+        response.send(res.data)
+    })
+    .catch( error => {
+        console.log('Error on now playing request', error);
+    })
+})
+
+router.get('/top', (request, response) => {
+    let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`
+
+    axios.get(url)
+    .then( res => {
+        response.send(res.data)
+    })
+    .catch( error => {
+        console.log('Error on now playing request', error);
+    })
+})
+
+router.get('/popular', (request, response) => {
+    let url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+
+    axios.get(url)
+    .then( res => {
+        response.send(res.data)
+    })
+    .catch( error => {
+        console.log('Error on now playing request', error);
+    })
+})
+
+
 router.post('/', (request, response) => {
     if (request.isAuthenticated()){
     let newRating = request.body; 

@@ -101,7 +101,10 @@ li a {
  }
  .header-nav {
    color: white;
-   
+ }
+
+ #header-logout{
+  margin-top: 13px;
  }
 
  .demographic-select {
@@ -110,7 +113,7 @@ li a {
    margin-right: 10px;
  }
 
- input{
+ #search-input{
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 20px;
@@ -119,6 +122,15 @@ li a {
 .graph {
   height: 200px;
 }
+
+#flame-emoji {
+  height:40px;
+}
+
+#movie-nav {
+  color: blue;
+}
+
 /* Change the link color to #111 (black) on hover
 li a:hover {
   text-decoration: underline;

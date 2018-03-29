@@ -1,7 +1,7 @@
 app.service('MovieService', ['$http', '$location', function($http, $location){
     let self = this; 
 
-    self.nowPlayingArray = {list: []};
+    self.homePageArray = {list: []};
     // self.moviePage = {list: []};
     self.enteredRating = {};
     
@@ -21,7 +21,7 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
         $http.get('/movies')
         .then(function(response) {
             console.log('movie call', response.data.results);
-            self.nowPlayingArray.list = response.data.results;
+            self.homePageArray.list = response.data.results;
         }).catch(function(error){
             console.log('Error getting new releases', error);
         })
@@ -44,22 +44,6 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
         })
     }
     
-    // self.getMovieAverage = function(id) {
-    //     $http({
-    //         method: 'GET',
-    //         url: `/movies/average/${id}`
-    //     })
-    //     .then(function(response) {
-    //         console.log('get avg', response.data[0]);
-    //         self.moviePage.list.averageRating = Math.floor(response.data[0].avg);
-    //     })
-    //     // .then(function(response) {
-    //     //     $location.url(`/movie/${id}`);
-    //     // })
-    //     .catch(function(error) {
-    //         console.log('get avg error', error);
-    //     })
-    // }
     
     self.getRatingsForChart = function(id){
         //function runs in self.goToMoviePage at line 14
@@ -86,6 +70,37 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
         })
     }
 
+    self.searchMovies = function(movieSearch){
+        console.log('movie search', movieSearch.input)
+        let search = movieSearch.input;
+        $http.get(`/movies/search/${search}`)
+        .then(function(response) {
+            console.log('search', response.data.results);
+            self.homePageArray.list = response.data.results;
+        }).catch(function(error){
+            console.log('Error getting search', error);
+        })
+    }
+
+    self.getTopRated = function(){
+        $http.get(`/movies/top`)
+        .then(function(response) {
+            console.log('search', response.data.results);
+            self.homePageArray.list = response.data.results;
+        }).catch(function(error){
+            console.log('Error getting search', error);
+        })
+    }
+
+    self.getPopular = function(){
+        $http.get(`/movies/popular`)
+        .then(function(response) {
+            console.log('search', response.data.results);
+            self.homePageArray.list = response.data.results;
+        }).catch(function(error){
+            console.log('Error getting search', error);
+        })
+    }
     
     self.getNowPlaying();
 }])

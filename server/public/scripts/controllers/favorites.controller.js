@@ -7,7 +7,7 @@ app.controller('FavoritesController', ['UserService', 'MovieService', '$http', f
     
     self.favoriteMovies = {list: []}
 
-    self.getUserMovies = function(){
+    self.getFavoriteMovies = function(){
       $http.get('/movies/favorites')
       .then(function(response) {
           console.log('favorites movie call', response.data);
@@ -28,5 +28,5 @@ app.controller('FavoritesController', ['UserService', 'MovieService', '$http', f
       })
     }
   
-    self.getUserMovies();
+    self.getFavoriteMovies();
   }]);
