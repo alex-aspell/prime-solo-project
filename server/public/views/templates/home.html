@@ -14,23 +14,16 @@
         <a ng-click="hc.getPopular(); popular=true; nowplaying=true; toprated=false">Popular</a>
     </div>
     <section class="row">
-            <div class="col-md-4" ng-repeat="movie in hc.homePageArray.list">
+            <div class="col-md-4" dir-paginate="movie in hc.homePageArray.list|itemsPerPage: 25">
                 <!-- <div ng-click="hc.goToMoviePage(movie)">{{movie.title}}</div> -->
                 <br>
                 <img ng-click="hc.goToMoviePage(movie)" src="http://image.tmdb.org/t/p/w342{{movie.poster_path}}">
             </div>
     </section>
     <div>
-        <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">4</a></li>
-                      <li class="page-item"><a class="page-link" href="#">5</a></li>
-                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-            </nav>
+        <dir-pagination-controls
+        direction-links="true"
+        boundary-links="false">
+        </dir-pagination-controls>
     </div>
 </main>
