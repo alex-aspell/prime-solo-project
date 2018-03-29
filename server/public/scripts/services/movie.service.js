@@ -20,8 +20,8 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
     self.getNowPlaying = function($routeParams) {
         $http.get('/movies')
         .then(function(response) {
-            console.log('movie call', response.data.results);
-            self.homePageArray.list = response.data.results;
+            console.log('movie call', response.data);
+            self.homePageArray.list = response.data;
         }).catch(function(error){
             console.log('Error getting new releases', error);
         })

@@ -7,10 +7,17 @@ const apiKey = '4a5d31bd9f16d5c8d4ac776d630c9bc1';
 
 router.get('/', (request, response) => {
     let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
-
+    let url2 = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=2`
+    let responseArray = [];
     axios.get(url)
     .then( res => {
-        response.send(res.data)
+        let responseOne = res.data.results;
+        axios.get(url2)
+        .then( res => {
+            let responseTwo = res.data.results;
+            responseArray = responseOne.concat(responseTwo);
+            response.send(responseArray);
+        })
     })
     .catch( error => {
         console.log('Error on now playing request', error);
