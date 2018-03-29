@@ -85,8 +85,8 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
     self.getTopRated = function(){
         $http.get(`/movies/top`)
         .then(function(response) {
-            console.log('search', response.data.results);
-            self.homePageArray.list = response.data.results;
+            console.log('search', response.data);
+            self.homePageArray.list = response.data;
         }).catch(function(error){
             console.log('Error getting search', error);
         })
@@ -95,8 +95,8 @@ app.service('MovieService', ['$http', '$location', function($http, $location){
     self.getPopular = function(){
         $http.get(`/movies/popular`)
         .then(function(response) {
-            console.log('search', response.data.results);
-            self.homePageArray.list = response.data.results;
+            console.log('search', response.data);
+            self.homePageArray.list = response.data;
         }).catch(function(error){
             console.log('Error getting search', error);
         })

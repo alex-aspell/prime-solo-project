@@ -8,15 +8,30 @@ const apiKey = '4a5d31bd9f16d5c8d4ac776d630c9bc1';
 router.get('/', (request, response) => {
     let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
     let url2 = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=2`
+    let url3 = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=3`
+    let url4 = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=4`
+    let url5 = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=5`
     let responseArray = [];
     axios.get(url)
     .then( res => {
         let responseOne = res.data.results;
         axios.get(url2)
         .then( res => {
-            let responseTwo = res.data.results;
-            responseArray = responseOne.concat(responseTwo);
-            response.send(responseArray);
+        let responseTwo = res.data.results;
+            axios.get(url3)
+                .then( res => {
+                let responseThree = res.data.results;
+                    axios.get(url3)
+                        .then( res => {
+                        let responseFour = res.data.results;
+                            axios.get(url3)
+                                .then( res => {
+                                let responseFive = res.data.results;
+                                responseArray = responseOne.concat(responseTwo, responseThree, responseFour, responseFive);
+                                response.send(responseArray);
+                    })
+                })
+            })
         })
     })
     .catch( error => {
@@ -53,26 +68,73 @@ router.get('/search/:search', (request, response) => {
 
 router.get('/top', (request, response) => {
     let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`
-
+    let url2 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=2`
+    let url3 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=3`
+    let url4 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=4`
+    let url5 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=5`
+    let responseArray = [];
     axios.get(url)
     .then( res => {
-        response.send(res.data)
+        let responseOne = res.data.results;
+        console.log(res.data.results);
+        axios.get(url2)
+        .then( res => {
+        let responseTwo = res.data.results;
+            axios.get(url3)
+                .then( res => {
+                let responseThree = res.data.results;
+                    axios.get(url3)
+                        .then( res => {
+                        let responseFour = res.data.results;
+                            axios.get(url3)
+                                .then( res => {
+                                let responseFive = res.data.results;
+                                responseArray = responseOne.concat(responseTwo, responseThree, responseFour, responseFive);
+                                response.send(responseArray);
+                    })
+                })
+            })
+        })
     })
     .catch( error => {
         console.log('Error on now playing request', error);
     })
+    
 })
 
 router.get('/popular', (request, response) => {
     let url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
-
+    let url2 = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=2`
+    let url3 = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=3`
+    let url4 = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=4`
+    let url5 = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=5`
+    let responseArray = [];
     axios.get(url)
     .then( res => {
-        response.send(res.data)
+        let responseOne = res.data.results;
+        axios.get(url2)
+        .then( res => {
+        let responseTwo = res.data.results;
+            axios.get(url3)
+                .then( res => {
+                let responseThree = res.data.results;
+                    axios.get(url3)
+                        .then( res => {
+                        let responseFour = res.data.results;
+                            axios.get(url3)
+                                .then( res => {
+                                let responseFive = res.data.results;
+                                responseArray = responseOne.concat(responseTwo, responseThree, responseFour, responseFive);
+                                response.send(responseArray);
+                    })
+                })
+            })
+        })
     })
     .catch( error => {
         console.log('Error on now playing request', error);
     })
+    
 })
 
 
