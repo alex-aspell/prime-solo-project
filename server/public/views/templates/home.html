@@ -14,10 +14,12 @@
         <a ng-click="hc.getPopular(); popular=true; nowplaying=true; toprated=false">Popular</a>
     </div>
     <section class="row">
-            <div class="col-md-4" dir-paginate="movie in hc.homePageArray.list|itemsPerPage:25">
-                <!-- <div ng-click="hc.goToMoviePage(movie)">{{movie.title}}</div> -->
+            <div class="col-md-4" dir-paginate="movie in hc.homePageArray.list|itemsPerPage:27">
                 <br>
+                
                 <img ng-click="hc.goToMoviePage(movie)" src="http://image.tmdb.org/t/p/w342{{movie.poster_path}}">
+                <!-- <div ng-click="hc.goToMoviePage(movie)">{{movie.title}}</div> -->
+                
             </div>
     </section>
     <div>

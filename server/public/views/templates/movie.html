@@ -16,11 +16,14 @@
                 <p>Rate {{movie.title}} between 1 and 100</p>
                 <h3>Heat Rating</h3>
                 <img src="images/{{movie.heatRating}}.png" id="flame-emoji">
+                <br><br><br>
+                <h5>Whats is a heat rating?<button class="btn btn-danger" ng-click="mc.heatRatingDescription()">?</button></h5>
             </div>
     </div>
     <br>
     <br>
     <br>
+    <h3 class="offset-md-5 col-md-2">All Ratings</h3>
     <div class="row graph" id='thingy'>
             <div class="col-md-8 offset-md-2" id="line" width="800" height="450"></div>
     </div>
@@ -45,14 +48,15 @@
             </select>
         </div>
         <div class="col-md-1">
-            <button ng-click=mc.getDemographicInfo(mc.demographics)>Search</button>
+            <button ng-click="mc.getDemographicInfo(mc.demographics); description=true">Search</button>
         </div>
     </div>
+    <h3 ng-show="description" class="offset-md-5 col-md-3">Ratings for this Demographic</h3>
     <div class="row graph">
         <div class="col-md-8 offset-md-2" id="line2" width="800" height="450"></div>
     </div>
     <div class="row">
-        <h5>Average Rating for Demographic: {{movie.demographicRating}}</h5>
+        <h5 ng-show="description">Average Rating for Demographic: {{movie.demographicRating}}</h5>
     </div>
     <br>
     <br>

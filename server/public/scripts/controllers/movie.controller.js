@@ -12,6 +12,9 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
     self.enteredRating.user_id = UserService.userObject.id;
 
     let id = $routeParams.id;
+
+    let chartData = []; 
+    self.chart = null;
     //
     //Need to do a get using route params id that will get movie info from the API
     self.getMovieByID = function(id) {
@@ -78,6 +81,7 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
                 dataset.push({type: 'rating', x: xAxis[i], y: yAxis[i]})
             }
             console.log('dataset', dataset);
+
             self.createChart(dataset);
             
     } 
@@ -140,7 +144,7 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
             let prev;
             let dataset = [];
             
-            
+           
             ratingArray.sort();
             for ( let i = 0; i < ratingArray.length; i++ ) {
                 if ( ratingArray[i] !== prev ) {
@@ -156,27 +160,34 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
                 dataset.push({type: 'rating', x: xAxis[i], y: yAxis[i]})
             }
             console.log('dataset', dataset);
-            self.createDemographicChart(dataset);
+            chartData = dataset;
+            console.log(chartData);
+            self.createDemographicChart(chartData);
+            
             
     } 
     self.createDemographicChart = function(dataset){
-        let chart = new tauCharts.Chart({
-            guide: {
-                y: {label: {text: '# of Ratings'}},
-                x: { min: 0, max: 100, tickFormat: 's', label:{text: 'Rating Scale'}},
-                showGridLines: 'y',
-                interpolate: 'smooth-keep-extremum'
-            },
-            data: dataset,
-            type: 'line',
-            x: 'x',
-            y: 'y',
-            color: 'red',
-            settings: {
-                fitModel: 'fit-width'
-            }
-        });
-        chart.renderTo('#line2');
+        if (self.chart == null){
+            self.chart = new tauCharts.Chart({
+                guide: {
+                    y: {label: {text: '# of Ratings'}},
+                    x: { min: 0, max: 100, tickFormat: 's', label:{text: 'Rating Scale'}},
+                    showGridLines: 'y',
+                    interpolate: 'smooth-keep-extremum'
+                },
+                data: dataset,
+                type: 'line',
+                x: 'x',
+                y: 'y',
+                color: 'red',
+                settings: {
+                    fitModel: 'fit-width'
+                }
+            });
+        }
+        
+        self.chart.renderTo('#line2');
+        self.chart.setData(chartData);
     }
     
     self.getHeatRatings = function(id){
@@ -240,6 +251,26 @@ app.controller('MovieController', ['MovieService', 'UserService', '$routeParams'
          console.log('movie', self.moviePage.list);
     }
     
-    
-    
+    self.heatRatingDescription = function(){
+        swal({
+            title: "Heat Rating",
+            text: `The heat rating represents how agreed upon a movie\'s average rating is, based on the standard deviation.`,
+            icon: "info",
+            button: "next",
+        })
+        .then(function(value) {
+            swal({
+                icon: "../images/one.png",
+                text: "Indicates a low standard deviation. Ratings are close to the average. People agree on this movie.",
+                button: "next"
+            })
+            .then(function(value) {
+                swal({
+                    icon: "../images/four.png",
+                    text: "Indicates a high standard deviation. People either love this movie or hate it. "
+                })
+            })
+        })
+        
+    }
 }])
