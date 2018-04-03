@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-3">
                 <input class="header-input" id="search-input" ng-model="hc.searchMovies.input" type="text" placeholder="Search Movies">
-                <button class="header-input" ng-click="hc.searchMovies(hc.searchMovies)">Search</button>
+                <button class="header-input" ng-click="hc.searchMovies(hc.searchMovies); hc.searchMovies=''">Search</button>
             </div>
             <nav id="header-nav" class="col-md-2" ng-hide="hc.userObject.isAuthenticated">
                 <a class="header-nav" href="/#!login">Login</a>

@@ -4,8 +4,7 @@ const axios = require('axios');
 const pool = require('../modules/pool');
 
 
-// const apiKey = process.env.API_KEY;
-const apiKey = '4a5d31bd9f16d5c8d4ac776d630c9bc1'
+const apiKey = process.env.API_KEY;
 
 router.get('/', (request, response) => {
     let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
