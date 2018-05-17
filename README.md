@@ -29,17 +29,25 @@ Link to software that is required to install the app (e.g. node).
 
 npm install
 Start postreSQL database
-Copy, paste, and execute the SQL text from MTGDatabase.sql
+Copy, paste, and execute the SQL text from database.sql
 npm start
 localhost:5000
 
 Steps to get the development environment running.
 
 ```sql
-CREATE TABLE "users" (
-  "id" serial primary key,
-  "username" varchar(80) not null UNIQUE,
-  "password" varchar(240) not null
+CREATE TABLE users (
+"id" serial primary key,
+"username" varchar(80) not null UNIQUE,
+"password" varchar(240) not null,
+"age" int, 
+"gender" varchar(10)
+);
+
+CREATE TABLE ratings (
+"id" serial primary key,
+"rating" int, 
+"user_id" int
 );
 ```
 
