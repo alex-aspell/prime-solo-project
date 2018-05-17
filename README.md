@@ -9,6 +9,7 @@ NodeJS
 ExpressJS
 SQL
 The Movie Database
+TauCharts
 Bootstrap
 Sweet Alerts
 Passport
